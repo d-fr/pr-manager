@@ -1,3 +1,4 @@
 module.exports = {
-    PORT: 3000
+    PORT: 3000,
+    REVIEWERS: []
 }

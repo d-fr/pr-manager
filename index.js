@@ -12,6 +12,9 @@ let router = express.Router();
 // Export the router for requiring through the app
 module.exports = { router, config };
 
+// Requires the endpoints of the app
+require("./src/prListener");
+
 // Setup the API to parse request bodies as urlencoded or json
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());

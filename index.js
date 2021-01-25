@@ -10,7 +10,7 @@ let app = express();
 let router = express.Router();
 
 // Export the router for requiring through the app
-module.exports = { router };
+module.exports = { router, config };
 
 // Setup the API to parse request bodies as urlencoded or json
 app.use(bodyparser.urlencoded({ extended: false }));

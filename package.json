@@ -1,0 +1,20 @@
+{
+  "name": "pr-manager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/d-fr/dh-host.git"
+  },
+  "keywords": [],
+  "author": "Ichii",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/d-fr/dh-host/issues"
+  },
+  "homepage": "https://github.com/d-fr/dh-host#readme"
+}

@@ -1,0 +1,10 @@
+# NodeJS Utils files
+package-lock.json
+/node_modules
+
+# Config file
+config.js
+
+# Test files
+*.test.js
+test.js

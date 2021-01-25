@@ -1,4 +1,5 @@
 module.exports = {
     PORT: 3000,
-    REVIEWERS: []
+    REVIEWERS: [],
+    ALLOWED_REPOSITORIES: [] 
 }

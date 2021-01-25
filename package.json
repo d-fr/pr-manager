@@ -8,13 +8,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/d-fr/dh-host.git"
+    "url": "git+https://github.com/d-fr/pr-manager.git"
   },
   "keywords": [],
   "author": "Ichii",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/d-fr/dh-host/issues"
+    "url": "https://github.com/d-fr/pr-manager/issues"
   },
-  "homepage": "https://github.com/d-fr/dh-host#readme"
+  "homepage": "https://github.com/d-fr/pr-manager#readme"
 }

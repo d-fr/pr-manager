@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/d-fr/pr-manager/issues"
   },
-  "homepage": "https://github.com/d-fr/pr-manager#readme"
+  "homepage": "https://github.com/d-fr/pr-manager#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "fetch": "^1.1.0"
+  }
 }

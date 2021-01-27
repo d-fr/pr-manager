@@ -1,4 +1,4 @@
-const { GH_PAT, GH_USERNAME } = require("../index").config;
+const { GH_PAT } = require("../index").config;
 const fetch = require("node-fetch");
 
 module.exports = {
@@ -22,7 +22,7 @@ module.exports = {
         return new Promise((resolve, rejects) => {
             const data = {
                 method: "POST",
-                headers: { accept: 'application/vnd.github.v3+json', authorization: `${GH_USERNAME}:${GH_PAT}` },
+                headers: { accept: 'application/vnd.github.v3+json', authorization: `token ${GH_PAT}` },
                 body: JSON.stringify({ reviewers: [ user ] })
             };
             fetch(`https://api.github.com/repos/${repo}/pulls/${pull}/requested_reviewers`, data)

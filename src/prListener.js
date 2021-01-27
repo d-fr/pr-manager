@@ -11,7 +11,7 @@ router.post("/webhook/pull_request", async (req, res) => {
         if (config.ALLOWED_REPOSITORIES.indexOf(req.body.repository.full_name) < 0) return res.status(403).json({ message: "403: Forbidden" });
 
         let assignee = config.REVIEWERS[Math.floor(Math.random() * config.REVIEWERS.length)];
-        while (req.body.pull_request.user.login == assignee) {
+        while (req.body.pull_request.user.login.toLowerCase() == assignee) {
             assignee = config.REVIEWERS[Math.floor(Math.random() * config.REVIEWERS.length)];
         }
 

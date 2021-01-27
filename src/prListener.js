@@ -1,5 +1,5 @@
 const { router, config } = require("../index");
-const { assignUser } = require("./githubHandler");
+const { requestReview } = require("./githubHandler");
 
 router.post("/webhook/pull_request", async (req, res) => {
     if (isPing(req.body)) {
@@ -16,7 +16,7 @@ router.post("/webhook/pull_request", async (req, res) => {
         }
 
         let isOK = true;
-        await assignUser(req.body.number, req.body.repository.full_name, assignee)
+        await requestReview(req.body.number, req.body.repository.full_name, assignee)
             .then(() => {})
             .catch(error => { isOK = false; res.status(500).json({ message: "500: Internal Server Error", error: error }); });
         if (isOK == true) res.status(200).json({ message: "200: All clear" });

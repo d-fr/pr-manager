@@ -11,7 +11,8 @@ module.exports = {
             fetch(`https://api.github.com/repos/${repo}/issues/${issue}/assignees`, data)
                 .then(response => response.json())
                 .then(json => {
-                    console.log(json)
+                    console.log(json);
+                    resolve(json);
                 });
         });
     }

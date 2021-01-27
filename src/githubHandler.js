@@ -6,7 +6,7 @@ module.exports = {
         return new Promise((resolve, rejects) => {
             const data = {
                 method: "POST",
-                headers: { accept: 'application/vnd.github.v3+json', authorization: `${GH_USERNAME}:${GH_PAT}` },
+                headers: { accept: 'application/vnd.github.v3+json', authorization: `token ${GH_PAT}` },
                 body: JSON.stringify({ assignees: [ user ] })
             };
             fetch(`https://api.github.com/repos/${repo}/issues/${issue}/assignees`, data)

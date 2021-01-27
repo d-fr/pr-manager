@@ -16,9 +16,10 @@ router.post("/webhook/pull_request", (req, res) => {
         }
 
         assignUser(req.body.number, req.body.repository.full_name, assignee)
-            .then(() => {})
+            /*.then(() => {})
             .then(() => res.status(200).json({ message: "200: All clear !" }))
-            .catch(error => res.status(500).json({ message: "500: Internal Server Error", error: error }))
+            .catch(error => res.status(500).json({ message: "500: Internal Server Error", error: error })) */
+        res.status(200).json({ message: "debug" })
         
 
     } else return res.status(400).json({ message: "400: Bad Request" });

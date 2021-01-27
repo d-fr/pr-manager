@@ -15,13 +15,12 @@ router.post("/webhook/pull_request", (req, res) => {
             config.REVIEWERS[Math.floor(Math.random() * config.REVIEWERS.length)];
         }
 
+        let isOK = true;
         assignUser(req.body.number, req.body.repository.full_name, assignee)
             .then(() => {})
-            .finally(() => res.status(200).json({ message: "200: All clear !" }))
-            .catch(error => res.status(500).json({ message: "500: Internal Server Error", error: error }));
-        res.status(200).json({ message: "debug" })
-        
-
+            .catch(error => { isOK = false; res.status(500).json({ message: "500: Internal Server Error", error: error }); });
+        if (isOK == true) res.status(200).json({ message: "200: All clear" });
+      
     } else return res.status(400).json({ message: "400: Bad Request" });
 });
 

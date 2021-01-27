@@ -1,5 +1,5 @@
 const { GH_PAT, GH_USERNAME } = require("../index").config;
-const { fetch } = require("node-fetch");
+const fetch = require("node-fetch");
 
 module.exports = {
      assignUser(issue, repo, user) {

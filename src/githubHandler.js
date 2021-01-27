@@ -29,6 +29,7 @@ module.exports = {
                 .then(response => response.json())
                 .then(json => {
                     console.log(json);
+                    console.log(user)
                     resolve(json);
                 });
         });

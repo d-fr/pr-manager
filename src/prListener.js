@@ -12,7 +12,7 @@ router.post("/webhook/pull_request", async (req, res) => {
 
         let assignee = config.REVIEWERS[Math.floor(Math.random() * config.REVIEWERS.length)];
         while (req.body.pull_request.user.login == assignee) {
-            config.REVIEWERS[Math.floor(Math.random() * config.REVIEWERS.length)];
+            assignee = config.REVIEWERS[Math.floor(Math.random() * config.REVIEWERS.length)];
         }
 
         let isOK = true;

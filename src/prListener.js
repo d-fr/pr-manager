@@ -1,5 +1,5 @@
 const { router, config } = require("../index");
-const { requestReview, assignUser } = require("./githubHandler");
+const { requestReview, assignUser, postComment } = require("./githubHandler");
 
 router.post("/webhook/pull_request", async (req, res) => {
     if (isPing(req.body)) {
@@ -8,16 +8,17 @@ router.post("/webhook/pull_request", async (req, res) => {
 
     } else if (checkParams(req.body)) {
 
+        if (config.ALLOWED_REPOSITORIES.indexOf(req.body.repository.full_name) < 0) return res.status(403).json({ message: "403: Forbidden" });
+        
         if (config.VACATION_NOTICE.ENABLED) {
             
-            // TO DO: comment function
+            await postComment(req.body.number, req.body.repository.full_name, config.VACATION_NOTICE.MESSAGE)
+                .catch(error => { res.status(500).json({ message: "500: Internal Server Error", error: error }); console.log("ERROR: " + error.message) });
             res.status(200).json({ message: "200: All Clear" });
             return;
 
         }
-
-        if (config.ALLOWED_REPOSITORIES.indexOf(req.body.repository.full_name) < 0) return res.status(403).json({ message: "403: Forbidden" });
-
+        
         let assignee = config.REVIEWERS[Math.floor(Math.random() * config.REVIEWERS.length)];
         while (req.body.pull_request.user.login.toLowerCase() == assignee) {
             assignee = config.REVIEWERS[Math.floor(Math.random() * config.REVIEWERS.length)];
@@ -28,8 +29,13 @@ router.post("/webhook/pull_request", async (req, res) => {
             .then(() => assignUser(req.body.number, req.body.repository.full_name, assignee))
             .catch(error => { isOK = false; res.status(500).json({ message: "500: Internal Server Error", error: error }); console.log("ERROR: " + error.message) });
         
-            if (config.IMPORTANT_NOTICE.ENABLED) {
-            // TO DO: comment function
+        if (config.IMPORTANT_NOTICE.ENABLED) {
+            
+            await postComment(req.body.number, req.body.repository.full_name, config.IMPORTANT_NOTICE.MESSAGE)
+                .catch(error => { res.status(500).json({ message: "500: Internal Server Error", error: error }); console.log("ERROR: " + error.message) });
+            res.status(200).json({ message: "200: All Clear" });
+            return;
+
         }
 
         if (isOK == true) res.status(200).json({ message: "200: All clear" });

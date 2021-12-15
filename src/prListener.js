@@ -11,10 +11,10 @@ router.post("/webhook/pull_request", async (req, res) => {
         if (config.ALLOWED_REPOSITORIES.indexOf(req.body.repository.full_name) < 0) return res.status(403).json({ message: "403: Forbidden" });
         
         if (config.VACATION_NOTICE.ENABLED) {
-            
+            let isOK = true
             await postComment(req.body.number, req.body.repository.full_name, config.VACATION_NOTICE.MESSAGE)
-                .catch(error => { res.status(500).json({ message: "500: Internal Server Error", error: error }); console.log("ERROR: " + error.message) });
-            res.status(200).json({ message: "200: All Clear" });
+                .catch(error => { isOK = false; res.status(500).json({ message: "500: Internal Server Error", error: error }); console.log("ERROR: " + error.message) });
+            if (isOK) res.status(200).json({ message: "200: All Clear" });
             return;
 
         }

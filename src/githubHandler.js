@@ -34,6 +34,22 @@ module.exports = {
                     resolve(json);
                 });
         });
+    },
+
+    postComment(issue, repo, message) {
+        return new Promise((resolve, rejects) => {
+            const data = {
+                method: "POST",
+                headers: { accept: 'application/vnd.github.v3+json', authorization: `token ${GH_PAT}`},
+                body: JSON.stringify({ body: message })
+            }
+            fetch(`https://api.github.com/repos/${repo}/issues/${issue}/comments`)
+                .then(response => response.json())
+                .then(json => {
+                    if (json.documentation_url != undefined) rejects(json);
+                    resolve(json);
+                })
+        })
     }
 
 }

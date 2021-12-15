@@ -8,6 +8,14 @@ router.post("/webhook/pull_request", async (req, res) => {
 
     } else if (checkParams(req.body)) {
 
+        if (config.VACATION_NOTICE.ENABLED) {
+            
+            // TO DO: comment function
+            res.status(200).json({ message: "200: All Clear" });
+            return;
+
+        }
+
         if (config.ALLOWED_REPOSITORIES.indexOf(req.body.repository.full_name) < 0) return res.status(403).json({ message: "403: Forbidden" });
 
         let assignee = config.REVIEWERS[Math.floor(Math.random() * config.REVIEWERS.length)];
@@ -19,6 +27,11 @@ router.post("/webhook/pull_request", async (req, res) => {
         await requestReview(req.body.number, req.body.repository.full_name, assignee)
             .then(() => assignUser(req.body.number, req.body.repository.full_name, assignee))
             .catch(error => { isOK = false; res.status(500).json({ message: "500: Internal Server Error", error: error }); console.log("ERROR: " + error.message) });
+        
+            if (config.IMPORTANT_NOTICE.ENABLED) {
+            // TO DO: comment function
+        }
+
         if (isOK == true) res.status(200).json({ message: "200: All clear" });
       
     } else return res.status(400).json({ message: "400: Bad Request" });
